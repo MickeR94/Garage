@@ -116,7 +116,7 @@ namespace Garage
 
                         }
                         else if (choice == "4")
-                        {
+                        {                            
                             Console.Write("Enter Fuel type, Gas/Diesel: ");
                             string fuel = Console.ReadLine();
 
@@ -164,15 +164,46 @@ namespace Garage
                         }
                         break;
 
-                    case "4":
+                    case "4":                        
                         Console.Clear();
                         Console.WriteLine("*** LISTING ALL VEHICLES IN THE GARAGE ***");
+                        int planeCount = 0;
+                        int boatCount = 0;
+                        int busCount = 0;
+                        int carCount = 0;
+                        int motorcycleCount = 0;
                         Vehicle[] test = _garage.ListVehicles();                        
                         for (int i = 0; i < test.Length; i++)
                         {
-                            Console.Write($"    |  {test[i]}  "); // TODO: There's a bug here. says that test[i] is null
+                            if (test[i] != null)
+                            {
+                                if (test[i] is Airplane)
+                                {
+                                    planeCount++;
+                                }
+                                else if (test[i] is Boat)
+                                {
+                                    boatCount++;
+                                }
+                                else if (test[i] is Bus)
+                                {
+                                    busCount++;
+                                }
+                                else if (test[i] is Car)
+                                {
+                                    carCount++;
+                                }
+                                else if (test[i] is Motorcycle)
+                                {
+                                    motorcycleCount++;
+                                }
+                                Console.Write($"    |  {test[i].RegNum}  ");
+                            }
+                            
+                            
                         }
                         Console.Write("    |");
+                        Console.WriteLine($"Airplanes: {planeCount} * Boats: {boatCount} * Busses: {busCount} * Cars: {carCount} * Motorcycles: {motorcycleCount}");
                         Console.ReadLine();
 
                         break;
@@ -202,6 +233,7 @@ namespace Garage
                         
                         break;
 
+                    // Realized I have the TODO for a method in Garage-file. Need to put this in there instead
                     case "6":
                         Console.Clear();
                         int lookupNumWheels;
@@ -254,7 +286,7 @@ namespace Garage
                                 }
                                 else
                                 {
-                                    Console.Write($"** {parkedVehicles[i]}");
+                                    Console.Write($"** {parkedVehicles[i].RegNum}");
                                 }
                             }
                         }

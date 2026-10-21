@@ -31,7 +31,12 @@ namespace Garage
             
             for (int i = 0; i < _vehicles.Length; i++)
             {
-                if (_vehicles[i] == null) // Found an empty parking spot
+                if (_vehicles[i] == vehicle)
+                {
+                    Console.WriteLine("Vehicle already exists");
+                    return false;
+                }
+                else if (_vehicles[i] == null) // Found an empty parking spot
                 {
                     _vehicles[i] = vehicle;
                     Console.WriteLine("Vehicle was successfully parked!");
